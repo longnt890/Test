@@ -1,0 +1,94 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Chiều cao toàn màn hình */
+    margin: 0;
+    background-image: url("—Pngtree—note calendar hand painted frame_3852728.png");
+    background-size: contain; /* Đảm bảo ảnh nền nằm gọn trong phần tử */
+    background-repeat: no-repeat; /* Ngăn ảnh nền bị lặp lại */
+    background-position: center; /* Căn giữa ảnh nền */
+}
+
+.background-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Đặt hướng dọc nếu cần */
+    width: 100%; /* Đảm bảo chiếm toàn bộ chiều rộng */
+    height: 100%; /* Đảm bảo chiếm toàn bộ chiều cao */
+}
+
+#calendar {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* Bố cục 7 cột */
+    gap: 5px 2px;
+    padding: 5px; /* Cách đều bên trong */
+    border-radius: 15px; /* Bo góc */
+    max-width: 90%;
+    width: 600px;
+    position: relative; /* Vị trí tương đối cho lịch */
+    margin-left: 450px;
+    margin-top: 35px;
+}
+.background-image{
+    justify-content: center;
+    align-items: center;
+}
+
+.day {
+    padding: 15px; /* Giảm kích thước vùng nhấn */
+    font-size: 20px; /* Giảm kích thước chữ */
+    font-weight: bold; /* Tăng độ đậm của chữ */
+    text-align: center;
+    cursor: pointer;
+    border-radius: 10px; /* Bo góc lớn hơn */
+    transition: transform 0.2s ease, background-color 0.2s ease; /* Hiệu ứng chuyển đổi khi di chuột */
+    color: #091057;
+}
+
+.day:hover {
+    background-color: #cce5ff; /* Màu nền khi di chuột */
+    transform: scale(1.1); /* Tăng kích thước khi di chuột */
+}
+
+#image-display {
+    transform: translate(-50%, -50%); /* Căn chỉnh hoàn toàn ở giữa */
+    border: 5px solid #333; /* Đường viền quanh hình ảnh hiển thị */
+    border-radius: 15px; /* Bo góc lớn hơn */
+    background-color: white; /* Nền màu trắng */
+    padding: 0; /* Không padding */
+    z-index: 1000; /* Ưu tiên hiển thị */
+    width: 70%; /* Chiều rộng tối đa của phần hiển thị */
+    max-width: 700px; /* Giới hạn chiều rộng trên màn hình lớn */
+    height: auto; /* Chiều cao tự động */
+    opacity: 0; /* Bắt đầu ở trạng thái ẩn */
+    transform: scale(0.8); /* Bắt đầu nhỏ hơn một chút */
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Hiệu ứng mượt khi chuyển đổi */
+    display: flex; /* Căn giữa nội dung */
+    justify-content: center;
+    align-items: center;
+}
+
+#day-image {
+    max-width: 95%; /* Chiều rộng tối đa của hình ảnh */
+    max-height: 95%; /* Chiều cao tối đa */
+    object-fit: contain; /* Giữ tỉ lệ gốc của hình ảnh */
+    border-radius: 10px; /* Bo góc hình ảnh */
+    transform: scale(1); /* Giữ kích thước ban đầu */
+    transition: transform 0.5s ease; /* Hiệu ứng mượt khi thu phóng */
+}
+
+#image-display.show {
+    display: flex; /* Hiển thị khi được kích hoạt */
+    opacity: 1; /* Hiển thị với độ trong suốt hoàn toàn */
+    transform: scale(1); /* Kích thước ban đầu */
+}
+
+.hidden {
+    display: none; /* Ẩn phần tử */
+}
+
+.hidden-background {
+    background-image: none; /* Ẩn hình nền */
+}

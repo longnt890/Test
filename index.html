@@ -7,18 +7,22 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="background-container">
+    <div class="background-container" id="background-container">
         <div id="calendar">
             <!-- Calendar days will be generated dynamically -->
         </div>
     </div>
-    <div id="image-display">
+    <div id="image-display" style="display: none;">
         <img id="day-image" src="" alt="Day Image">
     </div>
-    <audio id="background-audio" autoplay loop muted>
-        <source src="music.mp3" type="audio/mpeg">
+
+    <!-- Thêm thẻ audio -->
+    <audio id="background-audio" autoplay loop>
+        <source src="audio/music.mp3" type="audio/mpeg"> <!-- Đường dẫn đến tệp âm thanh -->
         Your browser does not support the audio element.
     </audio>
+
+    <button id="toggle-sound">🔊</button> <!-- Nút để bật/tắt âm thanh -->
 
     <script src="script.js"></script>
 </body>

@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const dayImage = document.getElementById('day-image');
     const backgroundContainer = document.querySelector('.background-container');
     const body = document.body;
+    const audio = document.getElementById("background-audio");
 
     const imageToShow = 'IMG-20241002-WA0030.jpg';
 
@@ -13,10 +14,10 @@ document.addEventListener('DOMContentLoaded', () => {
         dayElement.className = 'day';
         dayElement.textContent = day;
         dayElement.addEventListener('click', () => {
-            dayImage.src = imageToShow;
+            showImage(imageToShow);
             calendar.style.display = 'none';
             backgroundContainer.classList.add('hidden');
-            imageDisplay.classList.add('show');
+            imageDisplay.style.display = 'block';
             body.classList.add('hidden-background');
         });
         calendar.appendChild(dayElement);
@@ -24,28 +25,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Return to calendar when clicking on the image display
     imageDisplay.addEventListener('click', () => {
-        imageDisplay.classList.remove('show');
-        setTimeout(() => {
-            calendar.style.display = 'grid';
-            backgroundContainer.classList.remove('hidden');
-            body.classList.remove('hidden-background');
-        }, 500);
+        imageDisplay.style.display = 'none';
+        calendar.style.display = 'grid';
+        backgroundContainer.classList.remove('hidden');
+        body.classList.remove('hidden-background');
     });
 
-    document.addEventListener("DOMContentLoaded", () => {
-        const audio = document.getElementById("background-audio");
-        const toggleSoundButton = document.getElementById("toggle-sound");
-    
-        // Xử lý sự kiện khi người dùng nhấn nút
-        toggleSoundButton.addEventListener("click", () => {
-            if (audio.muted) {
-                audio.muted = false;
-                toggleSoundButton.textContent = "🔇"; // Đổi biểu tượng thành tắt âm
-            } else {
-                audio.muted = true;
-                toggleSoundButton.textContent = "🔊"; // Đổi biểu tượng thành bật âm
-            }
-        });
-    });
-    
+    // Hiển thị ảnh khi cần thiết
+    function showImage(imageSrc) {
+        dayImage.src = imageSrc;
+        imageDisplay.style.display = 'block';
+    }
+
 });

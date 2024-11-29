@@ -4,19 +4,20 @@ body {
     align-items: center;
     height: 100vh; /* Chiều cao toàn màn hình */
     margin: 0;
-    background-image: url("—Pngtree—note calendar hand painted frame_3852728.png");
-    background-size: contain; /* Đảm bảo ảnh nền nằm gọn trong phần tử */
-    background-repeat: no-repeat; /* Ngăn ảnh nền bị lặp lại */
-    background-position: center; /* Căn giữa ảnh nền */
+
 }
 
 .background-container {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-image: url("—Pngtree—note calendar hand painted frame_3852728.png");
     flex-direction: column; /* Đặt hướng dọc nếu cần */
     width: 100%; /* Đảm bảo chiếm toàn bộ chiều rộng */
-    height: 100%; /* Đảm bảo chiếm toàn bộ chiều cao */
+    height: 100vh; /* Full viewport height */
+    background-size: contain; /* Đảm bảo ảnh nền nằm gọn trong phần tử */
+    background-repeat: no-repeat; /* Ngăn ảnh nền bị lặp lại */
+    background-position: center; /* Căn giữa ảnh nền */
 }
 
 #calendar {
@@ -27,9 +28,8 @@ body {
     border-radius: 15px; /* Bo góc */
     max-width: 90%;
     width: 600px;
-    position: relative; /* Vị trí tương đối cho lịch */
-    margin-left: 450px;
-    margin-top: 35px;
+    margin-right: 20px;
+    margin-top: 20px;
 }
 .background-image{
     justify-content: center;
@@ -61,7 +61,7 @@ body {
     z-index: 1000; /* Ưu tiên hiển thị */
     width: 70%; /* Chiều rộng tối đa của phần hiển thị */
     max-width: 700px; /* Giới hạn chiều rộng trên màn hình lớn */
-    height: auto; /* Chiều cao tự động */
+    height: auto; /* Chiều cao tự động *
     opacity: 0; /* Bắt đầu ở trạng thái ẩn */
     transform: scale(0.8); /* Bắt đầu nhỏ hơn một chút */
     transition: opacity 0.5s ease, transform 0.5s ease; /* Hiệu ứng mượt khi chuyển đổi */
@@ -71,8 +71,8 @@ body {
 }
 
 #day-image {
-    max-width: 95%; /* Chiều rộng tối đa của hình ảnh */
-    max-height: 95%; /* Chiều cao tối đa */
+    max-width: 100%; /* Chiều rộng tối đa của hình ảnh */
+    max-height: 100%; /* Chiều cao tối đa */
     object-fit: contain; /* Giữ tỉ lệ gốc của hình ảnh */
     border-radius: 10px; /* Bo góc hình ảnh */
     transform: scale(1); /* Giữ kích thước ban đầu */
@@ -87,8 +87,4 @@ body {
 
 .hidden {
     display: none; /* Ẩn phần tử */
-}
-
-.hidden-background {
-    background-image: none; /* Ẩn hình nền */
 }

@@ -38,17 +38,14 @@ document.addEventListener('DOMContentLoaded', () => {
         imageDisplay.style.display = 'block';
     }
 
-    // Thêm sự kiện nhấn cho nút phát âm thanh
-    toggleSoundButton.addEventListener("click", () => {
-        if (audio.paused) {
-            audio.play().catch(error => {
-                console.log("Không thể phát nhạc: ", error);
-            });
-            toggleSoundButton.textContent = "🔇"; // Đổi biểu tượng thành tắt âm
-        } else {
-            audio.pause();
-            toggleSoundButton.textContent = "🔊"; // Đổi biểu tượng thành bật âm
-        }
+    document.addEventListener('click', function() {
+        var audio = document.getElementById('background-audio');
+        audio.play();
     });
-
+    
+    audio.addEventListener('canplaythrough', function() {
+        audio.play().catch(error => {
+            console.error('Lỗi khi phát nhạc:', error);
+        });
+    });
 });

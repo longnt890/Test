@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const backgroundContainer = document.querySelector('.background-container');
     const body = document.body;
     const audio = document.getElementById("background-audio");
+    const toggleSoundButton = document.getElementById("toggle-sound");
 
     const imageToShow = 'IMG-20241002-WA0030.jpg';
 
@@ -36,5 +37,18 @@ document.addEventListener('DOMContentLoaded', () => {
         dayImage.src = imageSrc;
         imageDisplay.style.display = 'block';
     }
+
+    // Thêm sự kiện nhấn cho nút phát âm thanh
+    toggleSoundButton.addEventListener("click", () => {
+        if (audio.paused) {
+            audio.play().catch(error => {
+                console.log("Không thể phát nhạc: ", error);
+            });
+            toggleSoundButton.textContent = "🔇"; // Đổi biểu tượng thành tắt âm
+        } else {
+            audio.pause();
+            toggleSoundButton.textContent = "🔊"; // Đổi biểu tượng thành bật âm
+        }
+    });
 
 });

@@ -8,7 +8,7 @@ body {
 }
 
 .background-container {
-    display: flex;
+    display: none; /* Ẩn background container ban đầu */
     justify-content: center;
     align-items: center;
     background-image: url("—Pngtree—note calendar hand painted frame_3852728.png");
@@ -28,8 +28,10 @@ body {
     border-radius: 15px; /* Bo góc */
     max-width: 90%;
     width: 600px;
-    margin-right: 20px;
-    margin-top: 20px;
+    margin-top: 15%;
+    margin-left: 31%;
+    justify-items: center; /* Cn giữa các phần tử con trong grid */
+    align-items: center;
 }
 .background-image{
     justify-content: center;
@@ -45,6 +47,10 @@ body {
     border-radius: 10px; /* Bo góc lớn hơn */
     transition: transform 0.2s ease, background-color 0.2s ease; /* Hiệu ứng chuyển đổi khi di chuột */
     color: #091057;
+    display: flex; /* Sử dụng flexbox để căn giữa nội dung */
+    height: 30px;
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    align-items: center; /* Căn giữa theo chiều dọc */
 }
 
 .day:hover {
@@ -88,3 +94,54 @@ body {
 .hidden {
     display: none; /* Ẩn phần tử */
 }
+.container {
+    width: min(1000px, 100%);
+    margin: 0 auto;
+  }
+
+  .gift-box { margin-top: 2em; }
+  .gift-box__emoji { font-size: 10em; }
+  .gift-box__btn { font-size: 2em; }
+  .gift-box__emoji--claimed {
+    transition: transform 500ms ease;
+    transform: scale(1.5) rotate(12deg);
+  }
+
+  .gift-box__message {
+    margin-top: 4.5em;
+    font-size: 2em;
+    transition: all 500ms ease;
+  }
+  .gift-box__message--hidden {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  @keyframes joggle {
+    0%, 33%, 100% { transform: rotate(0deg); }
+    3.33% { transform: rotate(-10deg); }
+    6.67% { transform: rotate(12deg); }
+    10% { transform: rotate(-10deg); }
+    13.33% { transform: rotate(9deg); }
+    16.67% { transform: rotate(0deg); }
+  }
+
+  .fade-out {
+    opacity: 1;
+    transition: opacity 0.5s ease-in;
+  }
+
+  .fade-out.hide {
+    opacity: 0;
+  }
+
+  .zoom-in {
+    transform: scale(0);
+    transition: transform 0.5s ease-in, opacity 0.5s ease-in;
+    opacity: 0;
+  }
+
+  .zoom-in.show {
+    transform: scale(1);
+    opacity: 1;
+  }

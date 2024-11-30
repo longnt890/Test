@@ -1,27 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>J to J</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css"> <!-- Liên kết đến file CSS -->
+
+    <script type="module">
+        import { Application, Controller } from "https://cdn.jsdelivr.net/npm/@hotwired/stimulus@3.2.2/+esm";
+        import confetti from "https://cdn.skypack.dev/canvas-confetti";
+
+        const application = Application.start()
+
+        class GiftBoxController extends Controller {
+            static targets = ["emoji", "claimBtn", "message"];
+
+            claim() {
+                // Remove the joggle animation to stop continuous rotating.
+                this.emojiTarget.classList.remove("joggle");
+
+                // Force a reflow/repaint to reset the state before applying transform transition
+                void this.emojiTarget.offsetWidth;
+
+                // Add the class that triggers the smooth transition
+                this.emojiTarget.classList.add("gift-box__emoji--claimed");
+
+                this.claimBtnTarget.hidden = true;
+
+                setTimeout(() => {
+                    this.messageTarget.classList.remove("gift-box__message--hidden");
+                    this.messageTarget.hidden = true;
+                    this.emojiTarget.hidden = true;
+
+                    const backgroundContainer = document.getElementById("background-container");
+
+                    setTimeout(() => {
+                        backgroundContainer.style.display = "block";
+                    }, 2000);
+
+                    const heading = document.querySelector("h1");
+                    heading.style.display = "none";
+
+                    confetti({
+                        particleCount: 200,
+                        spread: 100,
+                        origin: { y: 0.25 },
+                    });
+                }, 500);
+            }
+        }
+
+        application.register("gift-box", GiftBoxController)
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const calendar = document.getElementById('calendar');
+            const imageDisplay = document.getElementById('image-display');
+            const dayImage = document.getElementById('day-image');
+            const backgroundContainer = document.querySelector('.background-container');
+            const body = document.body;
+            const audio = document.getElementById("background-audio");
+            const toggleSoundButton = document.getElementById("toggle-sound");
+
+            const imageToShow = 'IMG-20241002-WA0030.jpg';
+
+            // Kiểm tra xem lịch đã được tạo chưa
+            if (calendar.children.length === 0) {   
+                // Generate calendar days
+                for (let day = 1; day <= 30; day++) {
+                    const dayElement = document.createElement('div');
+                    dayElement.className = 'day';
+                    dayElement.textContent = day;
+
+                    // Chỉ thêm sự kiện click cho ngày 3
+                    if (day === 3) {
+                        dayElement.addEventListener('click', () => {
+                            // Thêm lớp fade-out cho background-container
+                            backgroundContainer.classList.add('fade-out'); // Thêm lớp fade-out cho background-container
+                            calendar.classList.add('fade-out'); // Thêm lớp fade-out cho lịch
+
+                            setTimeout(() => {
+                                showImage(imageToShow);
+                                calendar.style.display = 'none';
+                                backgroundContainer.style.display = 'none';
+                                imageDisplay.style.display = 'block';
+                                body.classList.add('hidden-background');
+                            }, 500); // Thời gian trùng khớp với thời gian hiệu ứng
+                        });
+                    }
+
+                    calendar.appendChild(dayElement);
+                }
+            }
+
+            // Return to calendar when clicking on the image display
+            imageDisplay.addEventListener('click', () => {
+                imageDisplay.classList.remove('show'); // Bỏ lớp show để bắt đầu hiệu ứng mờ
+                imageDisplay.classList.add('fade-out'); // Thêm lớp fade-out
+
+                // Đợi một chút trước khi ẩn ảnh và hiển thị lại lịch
+                setTimeout(() => {
+                    imageDisplay.style.display = 'none';
+                    calendar.classList.remove('fade-out'); // Bỏ lớp fade-out
+                    calendar.style.display = 'grid';
+                    backgroundContainer.style.display = 'block';
+                }, 500); // Thời gian trùng khớp với thời gian hiệu ứng
+            });
+
+            // Hiển thị ảnh khi cần thiết
+            function showImage(imageSrc) {
+                dayImage.src = imageSrc;
+                imageDisplay.style.display = 'block'; // Hiển thị ảnh trước
+
+                // Thêm độ trễ trước khi thêm lớp zoom-in
+                setTimeout(() => {
+                    imageDisplay.classList.add('zoom-in'); // Thêm lớp zoom-in
+                    imageDisplay.classList.add('show'); // Thêm lớp show để kích hoạt hiệu ứng
+                }, 300); // Độ trễ 300ms trước khi áp dụng hiệu ứng
+            }
+
+            document.addEventListener('click', function () {
+                var audio = document.getElementById('background-audio');
+                audio.play();
+            });
+
+
+            audio.addEventListener('canplaythrough', function () {
+                audio.play().catch(error => {
+                    console.error('Lỗi khi phát nhạc:', error);
+                });
+            });
+
+            // Ẩn background container ban đầu
+            document.getElementById('background-container').style.display = 'none';
+
+        });
+
+    </script>
 </head>
+
 <body>
+    <div class="mt-40">
+        <div class="container text-center">
+            <h1>Claim your gift</h1>
+
+            <div class="gift-box" data-controller="gift-box">
+                <div class="gift-box__emoji joggle" data-gift-box-target="emoji" data-action="click->gift-box#claim">🎁
+                </div>
+
+                <div data-gift-box-target="claimBtn">
+                </div>
+
+                <div class="gift-box__message gift-box__message--hidden" data-gift-box-target="message">
+                    🎉 Gift claimed 🎉
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="background-container" id="background-container">
         <div id="calendar">
             <!-- Calendar days will be generated dynamically -->
         </div>
     </div>
-    <div id="image-display" style   ="display: none;">
+    <div id="image-display" style="display: none;">
         <img id="day-image" src="" alt="Day Image">
     </div>
 
+    <script src="script.js"></script> <!-- Liên kết đến file JavaScript -->
     <!-- Thêm thẻ audio -->
-    <audio id="background-audio" autoplay loop preload="auto" >
+    <audio id="background-audio" autoplay loop preload="auto">
         <source src="audio/music.mp3" type="audio/mp3"> <!-- Đường dẫn đến tệp âm thanh -->
         Your browser does not support the audio element.
     </audio>
-
-    <script src="script.js"></script>
 </body>
+
 </html>

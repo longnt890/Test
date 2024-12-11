@@ -63,7 +63,8 @@
             const audio = document.getElementById("background-audio");
             const toggleSoundButton = document.getElementById("toggle-sound");
 
-            const imageToShow = 'IMG-20241002-WA0030.jpg';
+            const imageToShow1 = 'z6119189044038_36f4ead2ec65f06c1c64483276c11c0c.jpg';
+            const imageToShow2 = 'z6119188488855_38c39420d176c4e118c5a316cea27e03.jpg';
 
             // Kiểm tra xem lịch đã được tạo chưa
             if (calendar.children.length === 0) {   
@@ -73,6 +74,22 @@
                     dayElement.className = 'day';
                     dayElement.textContent = day;
 
+                    if (day === 12) {
+                        dayElement.addEventListener('click', () => {
+                            // Thêm lớp fade-out cho background-container
+                            backgroundContainer.classList.add('fade-out'); // Thêm lớp fade-out cho background-container
+                            calendar.classList.add('fade-out'); // Thêm lớp fade-out cho lịch
+
+                            setTimeout(() => {
+                                showImage(imageToShow1);
+                                calendar.style.display = 'none';
+                                backgroundContainer.style.display = 'none';
+                                imageDisplay.style.display = 'block';
+                                body.classList.add('hidden-background');
+                            }, 500); // Thời gian trùng khớp với thời gian hiệu ứng
+                        });
+                    }
+
                     // Chỉ thêm sự kiện click cho ngày 3
                     if (day === 3) {
                         dayElement.addEventListener('click', () => {
@@ -81,7 +98,7 @@
                             calendar.classList.add('fade-out'); // Thêm lớp fade-out cho lịch
 
                             setTimeout(() => {
-                                showImage(imageToShow);
+                                showImage(imageToShow2);
                                 calendar.style.display = 'none';
                                 backgroundContainer.style.display = 'none';
                                 imageDisplay.style.display = 'block';

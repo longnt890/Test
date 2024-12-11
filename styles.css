@@ -66,7 +66,7 @@ body {
     padding: 0; /* Không padding */
     z-index: 1000; /* Ưu tiên hiển thị */
     width: 70%; /* Chiều rộng tối đa của phần hiển thị */
-    max-width: 700px; /* Giới hạn chiều rộng trên màn hình lớn */
+    max-width: 500px; /* Giới hạn chiều rộng trên màn hình lớn */
     height: auto; /* Chiều cao tự động *
     opacity: 0; /* Bắt đầu ở trạng thái ẩn */
     transform: scale(0.8); /* Bắt đầu nhỏ hơn một chút */

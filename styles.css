@@ -23,7 +23,7 @@ body {
 #calendar {
     display: grid;
     grid-template-columns: repeat(6, 1fr); /* Bố cục 7 cột */
-    gap: 5px 2px;
+    gap: 4px 2px;
     padding: 6px; /* Cách đều bên trong */
     border-radius: 15px; /* Bo góc */
     max-width: 90%;
